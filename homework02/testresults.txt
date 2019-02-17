@@ -1,0 +1,687 @@
+TESTING THE DIE CLASS: TEST CONSTRUCTOR FOR INVALID NUMBERS OF SIDES:
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+TESTING THE DIE CLASS: TESTS ON 4-SIDED DIE:
+   roll() test for 4 sided die: 
+   You rolled a 1
+   You rolled a 3
+   You rolled a 4
+   You rolled a 3
+   You rolled a 2
+   Current value is: [2]
+TESTING THE DIE CLASS: TESTS ON 5-SIDED DIE:
+   roll() test for 5 sided die: 
+   You rolled a 4
+   You rolled a 1
+   You rolled a 2
+   You rolled a 4
+   You rolled a 2
+   Current value is: [2]
+TESTING THE DIE CLASS: TESTS ON 6-SIDED DIE:
+   roll() test for 6 sided die: 
+   You rolled a 4
+   You rolled a 6
+   You rolled a 1
+   You rolled a 5
+   You rolled a 3
+   Current value is: [3]
+TESTING THE DIE CLASS: TESTS ON 7-SIDED DIE:
+   roll() test for 7 sided die: 
+   You rolled a 5
+   You rolled a 5
+   You rolled a 4
+   You rolled a 2
+   You rolled a 2
+   Current value is: [2]
+TESTING THE DIE CLASS: TESTS ON 8-SIDED DIE:
+   roll() test for 8 sided die: 
+   You rolled a 3
+   You rolled a 1
+   You rolled a 4
+   You rolled a 1
+   You rolled a 4
+   Current value is: [4]
+TESTING THE DIE CLASS: TESTS ON 11-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count -- 
+      You rolled a 9
+      You rolled a 3
+      You rolled a 4
+      You rolled a 8
+      You rolled a 4
+TESTING THE DIE CLASS: TESTS ON 17-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count -- 
+      You rolled a 4
+      current value is: 4
+TESTING THE DIE CLASS: TESTS ON 111-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count -- 
+      You rolled a 42
+      current value is: 42
+......End of Die Class Testing.....
+
+
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 3 SIX-SIDED DICE:
+  DiceSet: 3 dice, six sided - ds36:
+3
+6
+[2]
+[2]
+[4]
+-----
+      initialized ds36 contents             : [[2][2][4]]
+      after collective roll ds36 contents   : [[6][5][3]]
+      after individual roll(2) ds36 contents: [[6][5][4]]
+      sum of dice values is: 15
+   Re-rolling all dice
+      after collective roll ds36 contents   : [[5][3][6]]
+      after individual roll(2) ds36 contents: [[5][3][1]]
+      sum of dice values is                 : 9
+   Test of getIndividual(): 
+      value of die at index 0: 5
+      value of die at index 1: 3
+      value of die at index 2: 1
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 6 NINE-SIDED DICE:
+   DiceSet: 6 dice, nine sided - ds69:
+6
+9
+[3]
+[1]
+[6]
+[4]
+[3]
+[1]
+-----
+      initialized ds36 contents             : [[3][1][6][4][3][1]]
+      after collective roll ds69 contents   : [[6][9][1][7][6][4]]
+      after individual roll(2) ds69 contents: [[6][9][9][7][6][4]]
+      sum of dice values is                 : 41
+   Re-rolling all dice
+      after collective roll ds69 contents   : [[2][4][4][4][8][3]]
+      after individual roll(3) ds69 contents: [[2][4][4][4][8][3]]
+      sum of dice values is                 : 25
+   Test of getIndividual(): 
+      value of die at index 0: 2
+      value of die at index 1: 4
+      value of die at index 2: 4
+      value of die at index 3: 4
+      value of die at index 4: 8
+      value of die at index 5: 3
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 9 SEVENTEEN-SIDED DICE:
+   DiceSet: 9 dice, 17 sided - ds917:
+9
+17
+[2]
+[3]
+[7]
+[12]
+[5]
+[5]
+[12]
+[9]
+[6]
+-----
+      initialized ds36 contents              : [[2][3][7][12][5][5][12][9][6]]
+      after collective roll ds917 contents   : [[8][13][16][8][10][1][16][4][13]]
+      after individual roll(6) ds917 contents: [[8][13][16][8][10][1][16][4][13]]
+      sum of dice values is                  : 89
+   Re-rolling all dice
+      after collective roll ds917 contents   : [[6][15][7][15][10][15][1][3][2]]
+      after individual roll(8) ds69 contents : [[6][15][7][15][10][15][1][3][16]]
+      sum of dice values is                  : 88
+   Test of getIndividual(): 
+      value of die at index 0: 6
+      value of die at index 1: 15
+      value of die at index 2: 7
+      value of die at index 3: 15
+      value of die at index 4: 10
+      value of die at index 5: 15
+      value of die at index 6: 1
+      value of die at index 7: 3
+      value of die at index 8: 16
+TESTING THE DICESET CLASS: TEST 'isIdentical()' FOR 9 SEVENTEEN-SIDED DICE:
+   Test of isIndentical(): 
+      Test of ds917 against ds69   : false
+      Test of ds917 against itself : true
+TESTING THE DICESET CLASS: TEST 'isIdentical()' FOR NEW SET OF 9 SEVENTEEN-SIDED DICE:
+9
+17
+[6]
+[8]
+[3]
+[8]
+[6]
+[9]
+[6]
+[13]
+[10]
+-----
+9
+17
+[10]
+[6]
+[9]
+[4]
+[17]
+[2]
+[11]
+[15]
+[1]
+-----
+   DiceSet ds917 contents       : [[2][4][14][10][4][15][8][15][13]]
+      New DiceSet ds2_917 contents : [[14][5][17][8][16][3][2][13][11]]
+      Test of ds917 against ds2_917: true
+......End of DiceSet Class Testing.....
+
+
+
+   Welcome to the Die Bowl!!
+
+
+ Enter '1' to ROLL ALL THE DICE 
+
+
+ Enter '2' to ROLL A SINGLE DIE 
+
+
+ Enter '3' to CALCULATE THE SCORE FOR THIS SET 
+
+
+ Enter '4' to SAVE THIS SCORE AS HIGH SCORE 
+
+
+ Enter '5' to DISPLAY THE HIGH SCORE 
+
+
+ Or, ENTER 'Q' TO QUIT THE GAME 
+
+5
+6
+[2]
+[2]
+[4]
+[3]
+[1]
+-----
+[[2][2][4][3][1]]
+>>1
+
+You rolled:[[6][5][3][6][2]]
+
+[[6][5][3][6][2]]
+>>1
+
+You rolled:[[3][2][6][3][1]]
+
+[[3][2][6][3][1]]
+>>1
+
+You rolled:[[1][5][6][2][3]]
+
+[[1][5][6][2][3]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][5][6][1][3]]
+
+[[1][5][6][1][3]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+"Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5" 
+
+   Welcome to the Die Bowl!!
+
+
+ Enter '1' to ROLL ALL THE DICE 
+
+
+ Enter '2' to ROLL A SINGLE DIE 
+
+
+ Enter '3' to CALCULATE THE SCORE FOR THIS SET 
+
+
+ Enter '4' to SAVE THIS SCORE AS HIGH SCORE 
+
+
+ Enter '5' to DISPLAY THE HIGH SCORE 
+
+
+ Or, ENTER 'Q' TO QUIT THE GAME 
+
+5
+6
+[6]
+[5]
+[1]
+[2]
+[6]
+-----
+[[6][5][1][2][6]]
+>>1
+
+You rolled:[[4][4][1][6][2]]
+
+[[4][4][1][6][2]]
+>>1
+
+You rolled:[[4][3][5][2][4]]
+
+[[4][3][5][2][4]]
+>>1
+
+You rolled:[[1][3][1][1][3]]
+
+[[1][3][1][1][3]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][3][1][2][3]]
+
+[[1][3][1][2][3]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][3][1][2][2]]
+
+[[1][3][1][2][2]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][3][3][2][2]]
+
+[[1][3][3][2][2]]
+>>3
+
+ The sum of your roll is:11
+
+[[1][3][3][2][2]]
+>>4
+
+ The HIGH SCORE is:11
+
+[[1][3][3][2][2]]
+>>5
+
+Your last saved HIGH SCORE was:11
+
+[[1][3][3][2][2]]
+>>1
+
+You rolled:[[4][4][5][3][4]]
+
+[[4][4][5][3][4]]
+>>1
+
+You rolled:[[3][5][5][2][1]]
+
+[[3][5][5][2][1]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[3][5][5][2][3]]
+
+[[3][5][5][2][3]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[3][2][5][2][3]]
+
+[[3][2][5][2][3]]
+>>3
+
+ The sum of your roll is:15
+
+[[3][2][5][2][3]]
+>>4
+
+ The HIGH SCORE is:15
+
+[[3][2][5][2][3]]
+>>5
+
+Your last saved HIGH SCORE was:15
+
+[[3][2][5][2][3]]
+>>q
+
+   Welcome to the Die Bowl!!
+
+
+ Enter '1' to ROLL ALL THE DICE 
+
+
+ Enter '2' to ROLL A SINGLE DIE 
+
+
+ Enter '3' to CALCULATE THE SCORE FOR THIS SET 
+
+
+ Enter '4' to SAVE THIS SCORE AS HIGH SCORE 
+
+
+ Enter '5' to DISPLAY THE HIGH SCORE 
+
+
+ Or, ENTER 'Q' TO QUIT THE GAME 
+
+11
+17
+[12]
+[2]
+[7]
+[14]
+[4]
+[6]
+[2]
+[12]
+[7]
+[17]
+[16]
+-----
+[[12][2][7][14][4][6][2][12][7][17][16]]
+>>1
+
+You rolled:[[4][7][3][10][14][3][4][12][17][8][17]]
+
+[[4][7][3][10][14][3][4][12][17][8][17]]
+>>1
+
+You rolled:[[11][4][3][15][8][2][17][11][12][2][1]]
+
+[[11][4][3][15][8][2][17][11][12][2][1]]
+>>1
+
+You rolled:[[1][13][16][7][1][10][6][8][8][17][6]]
+
+[[1][13][16][7][1][10][6][8][8][17][6]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][13][16][7][1][10][6][8][8][17][17]]
+
+[[1][13][16][7][1][10][6][8][8][17][17]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][16][16][7][1][10][6][8][8][17][17]]
+
+[[1][16][16][7][1][10][6][8][8][17][17]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][16][16][7][1][10][6][11][8][17][17]]
+
+[[1][16][16][7][1][10][6][11][8][17][17]]
+>>3
+
+ The sum of your roll is:110
+
+[[1][16][16][7][1][10][6][11][8][17][17]]
+>>4
+
+ The HIGH SCORE is:110
+
+[[1][16][16][7][1][10][6][11][8][17][17]]
+>>5
+
+Your last saved HIGH SCORE was:110
+
+[[1][16][16][7][1][10][6][11][8][17][17]]
+>>1
+
+You rolled:[[11][6][9][3][9][12][7][5][6][2][16]]
+
+[[11][6][9][3][9][12][7][5][6][2][16]]
+>>1
+
+You rolled:[[12][2][10][6][12][16][4][8][5][5][8]]
+
+[[12][2][10][6][12][16][4][8][5][5][8]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[12][2][10][6][12][10][4][8][5][5][8]]
+
+[[12][2][10][6][12][10][4][8][5][5][8]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[12][2][10][5][12][10][4][8][5][5][8]]
+
+[[12][2][10][5][12][10][4][8][5][5][8]]
+>>3
+
+ The sum of your roll is:81
+
+[[12][2][10][5][12][10][4][8][5][5][8]]
+>>4
+
+ The HIGH SCORE is:81
+
+[[12][2][10][5][12][10][4][8][5][5][8]]
+>>5
+
+Your last saved HIGH SCORE was:81
+
+[[12][2][10][5][12][10][4][8][5][5][8]]
+>>q
+
+   Welcome to the Die Bowl!!
+
+
+ Enter '1' to ROLL ALL THE DICE 
+
+
+ Enter '2' to ROLL A SINGLE DIE 
+
+
+ Enter '3' to CALCULATE THE SCORE FOR THIS SET 
+
+
+ Enter '4' to SAVE THIS SCORE AS HIGH SCORE 
+
+
+ Enter '5' to DISPLAY THE HIGH SCORE 
+
+
+ Or, ENTER 'Q' TO QUIT THE GAME 
+
+29
+4
+[2]
+[4]
+[1]
+[1]
+[3]
+[4]
+[3]
+[1]
+[2]
+[2]
+[4]
+[4]
+[1]
+[3]
+[3]
+[3]
+[4]
+[1]
+[3]
+[1]
+[4]
+[4]
+[4]
+[2]
+[3]
+[4]
+[1]
+[3]
+[4]
+-----
+[[2][4][1][1][3][4][3][1][2][2][4][4][1][3][3][3][4][1][3][1][4][4][4][2][3][4][1][3][4]]
+>>1
+
+You rolled:[[2][3][4][1][3][3][2][2][2][1][2][2][4][1][4][4][3][4][2][2][2][1][1][3][4][1][3][1][1]]
+
+[[2][3][4][1][3][3][2][2][2][1][2][2][4][1][4][4][3][4][2][2][2][1][1][3][4][1][3][1][1]]
+>>1
+
+You rolled:[[1][4][2][4][1][2][2][1][2][2][1][1][4][4][2][2][2][2][4][1][4][3][2][4][4][3][2][4][3]]
+
+[[1][4][2][4][1][2][2][1][2][2][1][1][4][4][2][2][2][2][4][1][4][3][2][4][4][3][2][4][3]]
+>>1
+
+You rolled:[[2][2][1][1][1][2][4][1][4][2][4][2][2][2][3][1][4][1][1][3][2][2][1][2][2][3][3][3][2]]
+
+[[2][2][1][1][1][2][4][1][4][2][4][2][2][2][3][1][4][1][1][3][2][2][1][2][2][3][3][3][2]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[2][2][1][1][1][2][4][1][4][2][4][2][2][2][3][1][4][1][1][3][2][2][1][2][2][3][3][3][1]]
+
+[[2][2][1][1][1][2][4][1][4][2][4][2][2][2][3][1][4][1][1][3][2][2][1][2][2][3][3][3][1]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[2][2][1][1][1][2][4][1][4][2][4][2][2][2][3][1][4][1][1][3][2][2][1][2][2][3][3][3][1]]
+
+[[2][2][1][1][1][2][4][1][4][2][4][2][2][2][3][1][4][1][1][3][2][2][1][2][2][3][3][3][1]]
+>>1
+
+You rolled:[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+
+[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+
+[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+>>3
+
+ The sum of your roll is:70
+
+[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+>>4
+
+ The HIGH SCORE is:70
+
+[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+>>5
+
+Your last saved HIGH SCORE was:70
+
+[[1][3][1][1][1][2][3][1][3][4][4][4][1][4][2][2][2][2][4][1][4][1][3][3][3][4][1][1][4]]
+>>1
+
+You rolled:[[3][1][1][1][3][2][4][2][2][1][2][3][4][2][4][3][2][2][2][1][4][2][3][3][2][4][4][1][3]]
+
+[[3][1][1][1][3][2][4][2][2][1][2][3][4][2][4][3][2][2][2][1][4][2][3][3][2][4][4][1][3]]
+>>1
+
+You rolled:[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][1][3][2][2][1][2]]
+
+[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][1][3][2][2][1][2]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][1][3][2][2][1][2]]
+
+[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][1][3][2][2][1][2]]
+>>2
+
+ Enter the index of the die you want to roll 
+
+>>
+
+ You rolled:[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][3][3][2][2][1][2]]
+
+[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][3][3][2][2][1][2]]
+>>3
+
+ The sum of your roll is:73
+
+[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][3][3][2][2][1][2]]
+>>4
+
+ The HIGH SCORE is:73
+
+[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][3][3][2][2][1][2]]
+>>5
+
+Your last saved HIGH SCORE was:73
+
+[[4][2][1][1][2][1][4][3][4][3][2][4][4][1][3][3][4][4][2][2][4][1][1][3][3][2][2][1][2]]
+>>q
+
+   Welcome to the Die Bowl!!
+
+
+ Enter '1' to ROLL ALL THE DICE 
+
+
+ Enter '2' to ROLL A SINGLE DIE 
+
+
+ Enter '3' to CALCULATE THE SCORE FOR THIS SET 
+
+
+ Enter '4' to SAVE THIS SCORE AS HIGH SCORE 
+
+
+ Enter '5' to DISPLAY THE HIGH SCORE 
+
+
+ Or, ENTER 'Q' TO QUIT THE GAME 
+
+3
+3
