@@ -257,7 +257,7 @@ public class SoccerSim {
         }
 
         Board board = new Board(balls, timeSlice);
-        Clock clock = new Clock(timeSlice);
+        // Clock clock = new Clock(timeSlice);
 
         Ball[] collisions = new Ball[(int)(args.length / 4)];
 
