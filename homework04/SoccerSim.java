@@ -295,6 +295,3 @@ public class SoccerSim {
 
     }
 }
-
-// i = 0              i=4              i=8            i=12
-// (x, y, x_v, y_v) (x, y, x_v, y_v) (x, y, x_v, y_v) .... (timeSlice)
