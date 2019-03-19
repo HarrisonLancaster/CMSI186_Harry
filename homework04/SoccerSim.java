@@ -74,6 +74,8 @@ class Ball {
     public void update(double timeSlice) {
         this.x = this.x + this.dx * timeSlice;
         this.y = this.y + this.dy * timeSlice;
+        this.dx = this.dx*Math.pow(0.99, timeSlice); //accounts for Force of friction in x direc
+        this.dy = this.dy*Math.pow(0.99, timeSlice); //accounts for Friciton in y direc
     }
 
 
@@ -88,6 +90,29 @@ class Ball {
     }
 }
 
+// Pole.java
+//------------------------------------------
+
+class Pole {
+    private double radius;
+    private double xLoc;
+    private double yLoc;
+
+    public Pole(){
+        this.radius = 3;
+        this.xLoc = (Math.random() * 100);
+        this.yLoc = (Math.random() * 100);
+        
+    }
+
+    public String toString() {
+        return "I am a pole of radius " + this.radius + "located at " + this.xLoc + "," + this.yLoc + ".";
+    }
+
+}
+
+
+
 
 
 
@@ -96,22 +121,17 @@ class Ball {
 class Board {
 
     private Ball[] balls;
-    private double boardSize; // 100 inches by 100 inches
-    private double[] pole;
-    private double radius;
+    private double boardSize; // 100 ft by 100 ft
+    private Pole pole;
     private double time;
     private double timeSlice;
-    private ArrayList<Ball> collisions = new ArrayList<Ball>();
-    private double collisionDistance = 9.9;
+    private double collisionDistance = 9.9; //inches
 
     // constructor for Board class
     public Board(Ball[] balls, double timeSlice) {
         this.balls = balls;
-
         this.boardSize = 100; // 100 inches by 100 inches
-        this.pole = new double[] {10, 10};
-        this.radius = 4.45;
-
+        this.pole = new Pole();
         this.time = 0;
         this.timeSlice = timeSlice;
     }
@@ -125,23 +145,36 @@ class Board {
  
      }
 
-    public Ball[] checkForCollisions() {
+    public Collision checkForCollisions() {
         // do some math
         // check for collisions
 
         Ball [] result = new Ball[this.balls.length];
+        Collision c1 = new Collision(this.time);
 
         for ( int i = 0; i < this.balls.length; i++ ) {
             Ball ballOne = this.balls[i];
-            double x1 = ballOne.getX();
-            double y1 = ballOne.getY();
+            double x1 = ballOne.getX()*12; //inches conversion;
+            double y1 = ballOne.getY()*12; //inches;
             if ( this.isInBounds(ballOne) ) {
                 for ( int j = i+1; j < this.balls.length; j++ ) {
                     Ball ballTwo = this.balls[j];
-                    double x2 = ballTwo.getX();
-                    double y2 = ballTwo.getY();
-                    if ( this.isInBounds(ballTwo) ) {
-                    	
+                    double x2 = ballTwo.getX()*12;
+                    double y2 = ballTwo.getY()*12;
+                    if ( this.isInBounds(ballTwo) && ballOne != ballTwo ) {
+                        double distance = Math.sqrt( ((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
+                        // System.out.println(distance);
+                
+                        if ( distance <= this.collisionDistance ) {
+                            // System.out.println("PRINTING BALLS");
+                            c1.addBall(ballOne);
+                            c1.addIndex(i + 1);
+                            // System.out.println(ballOne);
+                            c1.addBall(ballTwo);
+                            c1.addIndex(j + 1);
+                            // System.out.println(ballTwo);
+                            // System.out.println(c1);
+                        }
 
                     
                     }
@@ -158,8 +191,12 @@ class Board {
                 }
             }
         }
+
+        // new for loop checking balls with pole
+
+
         // return array of colliding balls, if there are none, array is empty;
-        return result;
+        return c1;
     }
 
     public double getTime() {
@@ -198,51 +235,88 @@ class Board {
     }
 }
 
-// // Timer.java
-// // ---------------------------------------
-// class Timer {
-//     private double elapsedTime;
-//     private double timeSlice;
+//Collision.java
+//--------------------------------------
 
-//     public Timer(double timeSlice) {
-//         this.timeSlice = timeSlice;
-//         this.elapsedTime = 0;
-//     }
+class Collision {
+    private double colTime;
+    private ArrayList<Ball> balls = new ArrayList<Ball>();
+    private ArrayList<Integer> ballIndex = new ArrayList<Integer>();
 
-//     public double getTime() {
-//         this.elapsedTime += timeSlice;
-//         return this.elapsedTime;
-//     }
+    public Collision(double time) {
+        this.colTime = time;
+    }
 
+    public void addBall(Ball b) {
+        this.balls.add(b);
+    }
 
-// }
+    public void addIndex(int apple) {
+        this.ballIndex.add(apple);
+    }
+
+    public ArrayList<Ball> getBalls() {
+        return this.balls;
+    }
+
+    public String toString() {
+        String result = "Collision Time: " + this.colTime + "\n";
+        // result += Arrays.toString(this.balls);
+
+        for (int i = 0; i < this.balls.size(); i++) {
+            result += "Ball " + Integer.toString( this.ballIndex.get(i) ) + ": ";
+            result += this.balls.get(i).toString() + "\n";
+        }
+
+        return result;
+    }
+
+}
 
 
 // SoccerSim.java
 // ----------------------------------------
 public class SoccerSim {
-
     public SoccerSim() {
         super();
     }
 
-    // private void handleArguments(String [] args) {
+    private double handleArgumentsAndGetTimeSlice(String [] args) {
 
-    // }
-    
+        System.out.println( "\n   Hello, welcome to the SoccerSim program!!\n\n" ) ;
+        if( 4 > args.length ) {
+           System.out.println( "   Sorry you must enter at least four arguments\n" +
+                               "   Usage: java SoccerSim <x> <y> <dx> <dy> and the optional [timeSlice]\n" +
+                               "   Please try again...........\n" );
+           System.exit( 1 );
+        } else if ( args.length % 4 != 0 && args.length % 4 != 1) {
+            System.out.println ( " Sorry, you must enter some multiple of four arguments\n" +
+                                 " Or, you can enter a multiple of four arguments plus an extra argument on the end for the optional timeSlice\n" +
+                                 " Please try again...........\n");
+            System.exit( 1 );
+        } else if ( args.length % 4 == 0) {
+            return  1;
+        } else if ( args.length % 4 == 1) {
+            return  args.length;
+        }
+        return 0;
+
+    }
+
     public static void main( String [] args ) {
         SoccerSim sim = new SoccerSim();
-        double timeSlice = 0;
+        double timeSlice = sim.handleArgumentsAndGetTimeSlice(args);
+        // sim.handleArguments(args);
         Ball[] balls = new Ball[(int)(args.length / 4)];
 
         // double time = 0;
 
-        if (args.length % 2 != 0) {
-            // args is odd length means we have a timeSlice
-            timeSlice = Double.parseDouble(args[args.length]);
-        } else {
-            timeSlice = 1;
-        }
+        // if (args.length % 2 != 0) {
+        //     // args is odd length means we have a timeSlice
+        //     timeSlice = Double.parseDouble(args[args.length]);
+        // } else {
+        //     timeSlice = 1;
+        // }
 
         int ballIndex = 0;
         for (int i = 0; i < args.length; i+=4) {
@@ -261,18 +335,37 @@ public class SoccerSim {
 
         Ball[] collisions = new Ball[(int)(args.length / 4)];
 
-
-        System.out.println(board);
+        Collision checkCollisions = board.checkForCollisions();
+        // System.out.println("PRINTING BOARD FIRST");
+        // System.out.println(board);
         while (!board.checkForAllBallsStopped() || collisions.length != 0) {
-            Ball[] checkCollisions = board.checkForCollisions();
+            checkCollisions = board.checkForCollisions();
+            ArrayList<Ball> collidingBalls = checkCollisions.getBalls();
+
+            System.out.println("PRINTING BOARD");
+            System.out.println(board);
+
+            System.out.println("COLLISIONS:");
+            System.out.println(checkCollisions);
+
+            // for (int i = 0; i < collidingBalls.size(); i++) {
+            //     System.out.println("PRINTING COLLIDING BALLS");
+            //     System.out.println(collidingBalls.get(i).toString());
+            // }
+
+            if(collidingBalls.size() > 0) {
+                System.out.println("BREAK");
+                break;
+            }
 
             // System.out.println("time: " + time)
             board.update();
-            System.out.println(board);
+            // System.out.println(board);
 
-            if (board.getTime() >= 10) {
-                System.exit(0);
-            }
+            // if (board.getTime() >= 5) {
+            //     // System.exit(0);
+            //     break;
+            // }
 
             // if (board.hasCollision()) {
             //     // print something
@@ -281,17 +374,15 @@ public class SoccerSim {
         }
 
 
+        // System.out.println("============");
         if (collisions.length == 0) {
             System.out.println("NO COLLISIONS POSSIBLE");
         }else {
-            System.out.println(collisions);
+            for (int i = 0; i < checkCollisions.getBalls().size(); i++) {
+                System.out.println(checkCollisions.getBalls().get(i));
+            }
         }
 
         System.exit(0);
-
-
-
-
-
     }
 }
