@@ -98,40 +98,15 @@ class Ball {
     }
 }
 
-// Pole.java
-//------------------------------------------
-
-class Pole {
-    private double radius;
-    private double xLoc;
-    private double yLoc;
-
-    public Pole(){
-        this.radius = 3;
-        this.xLoc = (Math.random() * 100);
-        this.yLoc = (Math.random() * 100);
-        
-    }
-
-    public String toString() {
-        return "I am a pole of radius " + this.radius + "located at " + this.xLoc + "," + this.yLoc + ".";
-    }
-
-}
-
-
-
-
-
-
 // Board.java
 // -----------------------------------------
 class Board {
 
     private Ball[] balls;
-    private double boardSize; // 100 ft by 100 ft
-    private Pole pole;
+    private double boardSize; // 1000 ft by 1000 ft
     private double time;
+    private double poleLoc;
+    private double poleRad = 4.45;
     private double timeSlice;
     private double collisionDistance = 9.9; //inches
 
@@ -139,9 +114,9 @@ class Board {
     public Board(Ball[] balls, double timeSlice) {
         this.balls = balls;
         this.boardSize = 1000; // 100 inches by 100 inches
-        this.pole = new Pole();
         this.time = 0;
         this.timeSlice = timeSlice;
+        this.poleLoc = Math.random()*this.boardSize;
     }
 
     public boolean isInBounds(Ball ball) {
@@ -154,15 +129,12 @@ class Board {
      }
 
     public Collision checkForCollisions() {
-        // do some math
-        // check for collisions
-
-        Ball [] result = new Ball[this.balls.length];
+        // Ball [] result = new Ball[this.balls.length];
         Collision c1 = new Collision(this.time);
 
         for ( int i = 0; i < this.balls.length; i++ ) {
             Ball ballOne = this.balls[i];
-            double x1 = ballOne.getX()*12; //inches conversion;
+            double x1 = ballOne.getX()*12; //inches
             double y1 = ballOne.getY()*12; //inches;
             if ( this.isInBounds(ballOne) ) {
                 for ( int j = i+1; j < this.balls.length; j++ ) {
@@ -171,13 +143,10 @@ class Board {
                     double y2 = ballTwo.getY()*12;
                     if ( this.isInBounds(ballTwo) && ballOne != ballTwo ) {
                         double distance = Math.sqrt( ((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
-                        // System.out.println(distance);
                 
                         if ( distance <= this.collisionDistance ) {
                             System.out.println("Balls " + (i+1) + " and " + (j+1) + " collided.");
                             System.out.println("Collision time is " + getTime() + "." );
-                            // System.out.println(balls[i+1].toString());
-                            // System.out.println(balls[j+1].toString());
                             System.exit(0);
                             // // System.out.println("PRINTING BALLS");
                             // c1.addBall(ballOne);
@@ -194,10 +163,21 @@ class Board {
                 }
             }
         }
-
+        for ( int i = 0; i < this.balls.length; i++ ) {
+            Ball poleBall = this.balls[i];
+            double xp = poleBall.getX()*12; //inches;
+            double yp = poleBall.getY()*12;
+            if ( this.isInBounds(poleBall) ) {
+                double poleDistance = Math.sqrt( (xp-this.poleLoc*12)*(xp-this.poleLoc*12) + (yp-this.poleLoc*12)*(yp-this.poleLoc*12) );
+                if ( poleDistance <= this.collisionDistance ) {
+                    System.out.println("Ball " + (i+1) + " and the pole collided.");
+                    System.out.println("Collision time is " + getTime() + "." );
+                    System.exit(0);
+            }
+        }
         // new for loop checking balls with pole
 
-
+        }
         // return array of colliding balls, if there are none, array is empty;
         return c1;
     }
@@ -230,8 +210,7 @@ class Board {
     }
 
     public String toString() {
-        String result = "Time: " + this.time + "\n" + "Board Size: " + "(" + this.boardSize + "," + this.boardSize + ") \n";
-        // result += Arrays.toString(this.balls);
+        String result = "Time: " + this.time + "\n" + "Board Size: " + "(" + this.boardSize + "," + this.boardSize + ") \n" + "Pole Location: (" + this.poleLoc + "," + this.poleLoc + ") \n" + "Pole Size: " + this.poleRad + "\n";
 
         for (int i = 0; i < this.balls.length; i++) {
             result += "Ball " + Integer.toString( i + 1 ) + ": ";
