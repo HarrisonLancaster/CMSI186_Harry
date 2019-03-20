@@ -47,6 +47,14 @@ class Ball {
         return this.y;
     }
 
+    public double getDx() {
+        return this.dx;
+    }
+
+    public double getDy() {
+        return this.dy;
+    }
+
     // public double getXLocation() {
     // 	this.x = this.x + this.dx * this.timeSlice;
     //     return this.x;
@@ -130,7 +138,7 @@ class Board {
     // constructor for Board class
     public Board(Ball[] balls, double timeSlice) {
         this.balls = balls;
-        this.boardSize = 100; // 100 inches by 100 inches
+        this.boardSize = 1000; // 100 inches by 100 inches
         this.pole = new Pole();
         this.time = 0;
         this.timeSlice = timeSlice;
@@ -166,28 +174,23 @@ class Board {
                         // System.out.println(distance);
                 
                         if ( distance <= this.collisionDistance ) {
-                            // System.out.println("PRINTING BALLS");
-                            c1.addBall(ballOne);
-                            c1.addIndex(i + 1);
-                            // System.out.println(ballOne);
-                            c1.addBall(ballTwo);
-                            c1.addIndex(j + 1);
-                            // System.out.println(ballTwo);
-                            // System.out.println(c1);
+                            System.out.println("Balls " + (i+1) + " and " + (j+1) + " collided.");
+                            System.out.println("Collision time is " + getTime() + "." );
+                            // System.out.println(balls[i+1].toString());
+                            // System.out.println(balls[j+1].toString());
+                            System.exit(0);
+                            // // System.out.println("PRINTING BALLS");
+                            // c1.addBall(ballOne);
+                            // c1.addIndex(i + 1);
+                            // // System.out.println(ballOne);
+                            // c1.addBall(ballTwo);
+                            // c1.addIndex(j + 1);
+                            // // System.out.println(ballTwo);
+                            // // System.out.println(c1);
                         }
 
                     
                     }
-                    // if other_ball.isInBounds() {
-                    //     check if ball is colliding with other_ball
-                    //     do some math with the two balls' locations:
-                    //         ball.getLocation()
-                    //         other_ball.getLocation()
-
-                    // }
-
-
-
                 }
             }
         }
@@ -203,11 +206,15 @@ class Board {
         return this.time;
     }
 
-    public boolean checkForAllBallsStopped() {
-        // iterate over the balls and check if they're all come to a stop
-        // if so, return True other wise return False
-        
-        return false;
+    public boolean checkForBallsMoving() {
+        for (int i = 0; i < this.balls.length; i++) {
+            Ball ball = balls[i];
+            if(Math.abs(ball.getDx()) > 0.083 && Math.abs(ball.getDy()) > 0.083 ){
+                return false;
+            }
+        }
+        System.out.println("NO COLLISIONS POSSIBLE.");
+        return true;
     }
 
     public void update() {
@@ -223,7 +230,7 @@ class Board {
     }
 
     public String toString() {
-        String result = "Time: " + this.time + "\n";
+        String result = "Time: " + this.time + "\n" + "Board Size: " + "(" + this.boardSize + "," + this.boardSize + ") \n";
         // result += Arrays.toString(this.balls);
 
         for (int i = 0; i < this.balls.length; i++) {
@@ -260,7 +267,7 @@ class Collision {
     }
 
     public String toString() {
-        String result = "Collision Time: " + this.colTime + "\n";
+        String result = "";
         // result += Arrays.toString(this.balls);
 
         for (int i = 0; i < this.balls.size(); i++) {
@@ -277,6 +284,7 @@ class Collision {
 // SoccerSim.java
 // ----------------------------------------
 public class SoccerSim {
+    private double timeSlice;
     public SoccerSim() {
         super();
     }
@@ -295,9 +303,11 @@ public class SoccerSim {
                                  " Please try again...........\n");
             System.exit( 1 );
         } else if ( args.length % 4 == 0) {
-            return  1;
+            timeSlice = 1;
+            return timeSlice;
         } else if ( args.length % 4 == 1) {
-            return  args.length;
+            timeSlice = Double.parseDouble(args[args.length-1]);
+            return timeSlice;
         }
         return 0;
 
@@ -319,7 +329,7 @@ public class SoccerSim {
         // }
 
         int ballIndex = 0;
-        for (int i = 0; i < args.length; i+=4) {
+        for (int i = 0; i < args.length-1; i+=4) {
             double x = Double.parseDouble(args[i]);
             double y = Double.parseDouble(args[i + 1]);
             double dx = Double.parseDouble(args[i + 2]);
@@ -335,23 +345,26 @@ public class SoccerSim {
 
         Ball[] collisions = new Ball[(int)(args.length / 4)];
 
+        System.out.println("PRINTING BOARD");
+        System.out.println(board);
+
         Collision checkCollisions = board.checkForCollisions();
         // System.out.println("PRINTING BOARD FIRST");
         // System.out.println(board);
-        while (!board.checkForAllBallsStopped() || collisions.length != 0) {
+        while (!board.checkForBallsMoving() || collisions.length == 0) {
             checkCollisions = board.checkForCollisions();
             ArrayList<Ball> collidingBalls = checkCollisions.getBalls();
 
             System.out.println("PRINTING BOARD");
+            board.update();
             System.out.println(board);
 
-            System.out.println("COLLISIONS:");
+            // System.out.println("COLLISIONS:");
             System.out.println(checkCollisions);
 
-            // for (int i = 0; i < collidingBalls.size(); i++) {
-            //     System.out.println("PRINTING COLLIDING BALLS");
-            //     System.out.println(collidingBalls.get(i).toString());
-            // }
+            for (int i = 0; i < collidingBalls.size(); i++) {
+                System.out.println("PRINTING COLLIDING BALLS");
+            }
 
             if(collidingBalls.size() > 0) {
                 System.out.println("BREAK");
@@ -359,29 +372,20 @@ public class SoccerSim {
             }
 
             // System.out.println("time: " + time)
-            board.update();
-            // System.out.println(board);
-
-            // if (board.getTime() >= 5) {
-            //     // System.exit(0);
+            // if ( collisions.length == 0 && board.checkForBallsMoving() ) {
+                // System.out.println("NO COLLISIONS POSSIBLE");
             //     break;
-            // }
-
-            // if (board.hasCollision()) {
-            //     // print something
-            //     System.exit(0);
-            // }
+            // }else {
+                // System.out.println("Test Print ");
+                // for (int i = 0; i < checkCollisions.getBalls().size(); i++) {
+                //     System.out.println(checkCollisions.getBalls().get(i));
+                // }
+            
         }
 
 
         // System.out.println("============");
-        if (collisions.length == 0) {
-            System.out.println("NO COLLISIONS POSSIBLE");
-        }else {
-            for (int i = 0; i < checkCollisions.getBalls().size(); i++) {
-                System.out.println(checkCollisions.getBalls().get(i));
-            }
-        }
+
 
         System.exit(0);
     }
