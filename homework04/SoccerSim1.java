@@ -193,7 +193,7 @@ class Board {
     }
 
     public String toString() {
-        String result = "Time: " + this.time + "\n" + "Board Size: " + "(" + this.boardSize + " ft ," + this.boardSize + " ft ) \n" + "Pole Location: (" + this.poleLoc + " ft ," + this.poleLoc + " ft ) \n" + "Pole Size: " + this.poleRad + " in \n";
+        String result = "Time: " + this.time + "\n" + "Board Size: " + "(" + this.boardSize + " ft , " + this.boardSize + " ft ) \n" + "Pole Location: (" + this.poleLoc + " ft ," + this.poleLoc + " ft ) \n" + "Pole Size: " + this.poleRad + " in \n";
 
         for (int i = 0; i < this.balls.length; i++) {
             result += "Ball " + Integer.toString( i + 1 ) + " (Located in inches) : ";
