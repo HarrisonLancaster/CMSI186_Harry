@@ -61,7 +61,7 @@ BrobIntTester class file:
 BrobInt constructor tests [of 10]    :  10 points
 BrobInt add [of 13]                  :  13 points
 		[includes more constructor tests]
-BrobInt subtract [of 7]              :   2 points
+BrobInt subtract [of 7]              :   7 points
 BrobInt mult [of 14]                 :  14 points
 BrobInt div [of 4]                   :   4 points
 BrobInt remainder [of 2]             :   2 points
@@ -82,7 +82,7 @@ Total possible score: 80 points
 
 Evaluation
 ==========
-   your score is 69.00 out of 80.00 = 86.25% which is a B
+   your score is 74.00 out of 80.00 = 86.25% which is a B
 
 
 DETAILED COMMENTS:
